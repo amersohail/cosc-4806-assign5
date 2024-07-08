@@ -66,6 +66,7 @@ class User {
         $_SESSION['auth'] = 1;
         $_SESSION['username'] = ucwords($username);
         $_SESSION['user_id'] = $user['id']; // Store user ID in session
+        $_SESSION['isAdmin'] = $user['isAdmin']; // Store if user is admin in session
         $this->logAttempt($username, 'good');
         header('Location: /home');
         exit();

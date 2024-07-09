@@ -1,7 +1,7 @@
 <?php
-if (!isset($_SESSION['auth'])) {
-    header('Location: /login');
-}
+    require_once 'app/models/User.php';
+    // Load the User model
+    $user = new User();
 ?>
   
 <!DOCTYPE html>
@@ -39,16 +39,17 @@ if (!isset($_SESSION['auth'])) {
                           </ul>
                         <?php
                         // Check if isadmin session variable is set and equals 1
-                        if (isset($_SESSION['isadmin']) && $_SESSION['isadmin'] == 1) {
-                            echo '<li class="nav-item">
-                                      <a class="nav-link" href="/reports/">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-bar-graph me-1" viewBox="0 0 16 16">
-                                              <path d="M2 2a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 2zM8.75 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8.75 0zm5.5 11.25a.75.75 0 0 1-.75.75H10.5a.75.75 0 0 1 0-1.5h3a.75.75 0 0 1 .75.75zM5.75 5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V5.75a.75.75 0 0 1 .75-.75zm3-2.5a.75.75 0 0 1 .75.75v8a.75.75 0 0 1-1.5 0v-8a.75.75 0 0 1 .75-.75z"/>
-                                          </svg>
-                                          Admin Reports
-                                      </a>
-                                  </li>';
-                        }
+                          // Check if the user is admin
+                          if ($user->isAdmin()) {
+                              echo '<li class="nav-item">
+                                        <a class="nav-link" href="/reports/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-bar-graph me-1" viewBox="0 0 16 16">
+                                                <path d="M2 2a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 2zM8.75 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8.75 0zm5.5 11.25a.75.75 0 0 1-.75.75H10.5a.75.75 0 0 1 0-1.5h3a.75.75 0 0 1 .75.75zM5.75 5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V5.75a.75.75 0 0 1 .75-.75zm3-2.5a.75.75 0 0 1 .75.75v8a.75.75 0 0 1-1.5 0v-8a.75.75 0 0 1 .75-.75z"/>
+                                            </svg>
+                                            Admin Reports
+                                        </a>
+                                    </li>';
+                          }
                         ?>
                       </li>
                   </ul>

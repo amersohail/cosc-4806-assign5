@@ -1,7 +1,4 @@
 <?php
-// Start the session
-session_start();
-
 // Check if the username session variable is set
 if (!isset($_SESSION['username'])) {
     // Redirect to the login page

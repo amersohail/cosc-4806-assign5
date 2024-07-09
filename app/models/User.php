@@ -9,6 +9,18 @@ class User {
     public function __construct() {
     }
 
+  public function isAuthenticated() {
+      return isset($_SESSION['auth']) && $_SESSION['auth'] == 1;
+  }
+
+  public function isAdmin() {
+      return isset($_SESSION['role']) && $_SESSION['role'] == "admin";
+  }
+  
+  public function isReadOnly() {
+      return isset($_SESSION['role']) && $_SESSION['role'] == "readonly";
+  }
+  
     public function test () {
       $db = db_connect();
       $statement = $db->prepare("select * from users;");
@@ -32,8 +44,6 @@ class User {
      $statement->bindValue(':username', $username);
      $statement->bindValue(':attempt', $status);
      $statement->execute();
-     
-     
    }
 
     public function authenticate($username, $password) {
@@ -66,7 +76,7 @@ class User {
         $_SESSION['auth'] = 1;
         $_SESSION['username'] = ucwords($username);
         $_SESSION['user_id'] = $user['id']; // Store user ID in session
-        $_SESSION['isadmin'] = $user['isAdmin']; // Store if user is admin in session
+        $_SESSION['role'] = $user['role']; // Store if user is admin in session
         $this->logAttempt($username, 'good');
         header('Location: /home');
         exit();

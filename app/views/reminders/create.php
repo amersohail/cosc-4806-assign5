@@ -1,11 +1,5 @@
 <?php require_once 'app/views/templates/header.php' ?>
 
-<?php
-// Start the session
-session_start();
-
-?>
-
 <div class="container">
     <div class="page-header" id="banner">
         <div class="container mt-5">

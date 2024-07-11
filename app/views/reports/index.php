@@ -6,8 +6,15 @@
 <div class="container">
     <div class="page-header" id="banner">
         <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-primary text-center" role="alert">
+                    <h1 class="display-4 report-font-size">Admin Reports</h1>
+                </div>
+            </div>
             <div class="col-md-6">
-                <h2>Total logins by user</h2>
+                <div class="alert alert-secondary text-center" role="alert">
+                    <h2>Total logins by user</h2>
+                </div>
                 <?php if (isset($data['logins']) && !empty($data['logins'])): ?>
                     <?php
                     // Prepare data for report.js
@@ -25,9 +32,31 @@
                 <?php else: ?>
                     <p>No login attempts data available.</p>
                 <?php endif; ?>
+                <hr class="my-4">
+                <?php if (isset($data['logins_status']) && !empty($data['logins_status'])): ?>
+                    <?php
+                    // Prepare data for Chart.js
+                    $statusLabels = [];
+                    $statusCounts = [];
+                    foreach ($data['logins_status'] as $status) {
+                        $statusLabels[] = htmlspecialchars($status['attempt']);
+                        $statusCounts[] = (int) htmlspecialchars($status['count']);
+                    }
+                    ?>
+                    <div class="piePadd">
+                        <canvas id="statusChart"
+                                data-labels='<?= json_encode($statusLabels) ?>'
+                                data-data='<?= json_encode($statusCounts) ?>'>
+                        </canvas>
+                    </div>
+                <?php else: ?>
+                    <p>No login status data available.</p>
+                <?php endif; ?>
             </div>
             <div class="col-md-6">
-                <h2>Total reminders by user</h2>
+                <div class="alert alert-secondary text-center" role="alert">
+                    <h2>Total reminders by user</h2>
+                </div>
                 <?php if (isset($data['reminders']) && !empty($data['reminders'])): ?>
                     <?php
                     // Prepare data for report.js
@@ -45,6 +74,26 @@
                 <?php else: ?>
                     <p>No reminders data available.</p>
                 <?php endif; ?>
+                <hr class="my-4">
+                <!-- Toast Container -->
+                <div aria-live="polite" aria-atomic="true" class="position-relative">
+                    <div class="toast-container position-absolute top-0 end-0 p-3 w-100">
+                        <div id="topUserToast" class="toast w-100" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <strong class="me-auto">Most Reminders</strong>
+                                <small>Just now</small>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                <?php if (isset($data['topUser'])): ?>
+                                    <?= htmlspecialchars($data['topUser']['username']) ?> has the most reminders with a total of <?= $data['topUser']['note_count'] ?> reminders.
+                                <?php else: ?>
+                                    No reminder data available.
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

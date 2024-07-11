@@ -13,3 +13,10 @@
 .warningBox{
   background-color:#ffc107;
 }
+
+.report-font-size {
+    font-size: 2.5rem; 
+}
+.piePadd{
+  padding:2rem!important;
+}

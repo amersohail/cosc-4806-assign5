@@ -17,6 +17,16 @@ class Report {
       return is_array($rows) ? $rows : [$rows];
     }
 
+    public function get_logins_status () {
+    $db = db_connect();
+    $statement = $db->prepare("SELECT attempt, COUNT(*) AS count
+                              FROM log
+                              GROUP BY attempt");
+    $statement->execute();
+    $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return is_array($rows) ? $rows : [$rows];
+  }
+  
     public function get_reminders_by_users () {
       $db = db_connect();
       $statement = $db->prepare("SELECT users.username, COUNT(notes.id) AS note_count

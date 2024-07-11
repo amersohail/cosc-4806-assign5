@@ -1,15 +1,7 @@
-<?php require_once 'app/views/templates/header.php';
-?>
-<div class="container">
-    <div class="page-header" id="banner">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>You are at a secret page</h1>
-                <p class="lead"> <?= date("F jS, Y"); ?></p>
-            </div>
-        </div>
-    </div>
-</div>
+<?php require_once 'app/views/templates/header.php';?>
+
+<!-- Include Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="container">
     <div class="page-header" id="banner">
@@ -18,18 +10,23 @@
                 <h1>Admin Reports</h1>
                 <p class="lead">This page shows the admin reports.</p>
 
-                <h2>Login Attempts</h2>
-                <?php if (isset($data['logins'])): ?>
-                    <pre><?php print_r($data['logins']); ?></pre>
+                <h2>Total logins by user</h2>
+                <?php if (isset($data['logins']) && !empty($data['logins'])): ?>
+                    <?php
+                    // Prepare data for Chart.js
+                    $labels = [];
+                    $loginCounts = [];
+                    foreach ($data['logins'] as $login) {
+                        $labels[] = htmlspecialchars($login['username']);
+                        $loginCounts[] = htmlspecialchars($login['login_count']);
+                    }
+                    ?>
+                    <canvas id="loginChart" width="400" height="200"
+                            data-labels='<?= json_encode($labels) ?>'
+                            data-data='<?= json_encode($loginCounts) ?>'>
+                    </canvas>
                 <?php else: ?>
-                    <p>Login attempts data not received.</p>
-                <?php endif; ?>
-
-                <h2>Reminders</h2>
-                <?php if (isset($data['reminders'])): ?>
-                    <pre><?php print_r($data['reminders']); ?></pre>
-                <?php else: ?>
-                    <p>Reminders data not received.</p>
+                    <p>No login attempts data available.</p>
                 <?php endif; ?>
             </div>
         </div>
@@ -37,4 +34,6 @@
 </div>
 
 
-<?php require_once 'app/views/templates/footer.php'; ?>
+<script src="/app/script/report.js" type="text/javascript"></script>
+
+<?php require_once 'app/views/templates/footer.php'; ?>x

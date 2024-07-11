@@ -1,0 +1,40 @@
+<?php require_once 'app/views/templates/header.php';?>
+
+<div class="container">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Admin Reports</h1>
+                <p class="lead">This page shows the admin reports.</p>
+
+                <h2>Total logins by user</h2>
+                <?php if (isset($data['logins']) && !empty($data['logins'])): ?>
+                    <table class="table table-success table-striped">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Login Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            // Check if $data['logins'] is a single element or multiple
+                            $logins = is_array($data['logins']) && isset($data['logins'][0]) ? $data['logins'] : [$data['logins']];
+
+                            foreach ($logins as $login): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($login['username']); ?></td>
+                                    <td><?= htmlspecialchars($login['login_count']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <p>No login attempts data available.</p>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php require_once 'app/views/templates/footer.php'; ?>x

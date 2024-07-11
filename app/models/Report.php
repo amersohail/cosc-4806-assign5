@@ -38,6 +38,16 @@ class Report {
       $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
       return is_array($rows) ? $rows : [$rows];
     }
+
+    public function get_all_reminders () {
+    $db = db_connect();
+    $statement = $db->prepare("SELECT users.username, notes.subject,notes.created_at,notes.completed
+                              FROM notes
+                              JOIN users ON notes.user_id = users.id");
+    $statement->execute();
+    $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return is_array($rows) ? $rows : [$rows];
+  }
 }
 
 ?>

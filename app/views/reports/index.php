@@ -74,7 +74,13 @@
                 <?php else: ?>
                     <p>No reminders data available.</p>
                 <?php endif; ?>
+                
                 <hr class="my-4">
+
+                <button type="button" class="btn btn-primary mt-3 buttonMargin" data-bs-toggle="modal" data-bs-target="#remindersModal">
+                    Click to see all reminders
+                </button>
+                
                 <!-- Toast Container -->
                 <div aria-live="polite" aria-atomic="true" class="position-relative">
                     <div class="toast-container position-absolute top-0 end-0 p-3 w-100">
@@ -90,6 +96,43 @@
                                 <?php else: ?>
                                     No reminder data available.
                                 <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+                <!-- Modal -->
+                <div class="modal fade" id="remindersModal" tabindex="-1" aria-labelledby="remindersModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="remindersModalLabel">All Reminders</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Subject</th>
+                                            <th>Created At</th>
+                                            <th>Completed</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($data['reminders'] as $reminder): ?>
+                                            <tr>
+                                                <td><?= htmlspecialchars($reminder['username']); ?></td>
+                                                <td><?= htmlspecialchars($reminder['subject']); ?></td>
+                                                <td><?= htmlspecialchars($reminder['created_at']); ?></td>
+                                                <td><?= $reminder['completed'] ? 'Yes' : 'No'; ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>

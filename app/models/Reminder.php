@@ -5,9 +5,10 @@ class Reminder {
     public function __construct() {
     }
 
-    public function get_all_reminders () {
+    public function get_all_reminders ($user_id) {
       $db = db_connect();
-      $statement = $db->prepare("SELECT * FROM notes WHERE deleted IS NULL OR deleted = '' OR deleted = 0;");
+      $statement = $db->prepare("SELECT * FROM notes WHERE user_id = :user_id AND deleted IS NULL OR                     deleted = '' OR deleted = 0;");
+      $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
       $statement->execute();
       $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
       return is_array($rows) ? $rows : [$rows];

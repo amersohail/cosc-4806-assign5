@@ -120,7 +120,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($data['reminders'] as $reminder): ?>
+                                        <?php foreach ($data['reminders_all'] as $reminder): ?>
                                             <tr>
                                                 <td><?= htmlspecialchars($reminder['username']); ?></td>
                                                 <td><?= htmlspecialchars($reminder['subject']); ?></td>

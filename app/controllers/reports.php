@@ -19,7 +19,7 @@ class Reports extends Controller {
         $reminders_list = $report->get_reminders_by_users();
         $logins_status = $report->get_logins_status();
         $topUser = !empty($reminders_list) ? $reminders_list[0] : null;
-        $reminders_list = $report->get_all_reminders();
+        $reminders_all = $report->get_all_reminders();
         
         // Pass both lists to the view
         $this->view('reports/index', [
@@ -27,7 +27,7 @@ class Reports extends Controller {
             'reminders' => $reminders_list,
             'logins_status' => $logins_status,
             'topUser' => $topUser,
-            'reminders_list' => $reminders_list
+            'reminders_all' => $reminders_all
         ]);
     }
 }

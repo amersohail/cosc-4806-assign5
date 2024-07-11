@@ -4,7 +4,8 @@ class Reminders extends Controller {
 
     public function index() {		
       $reminder = $this->model('Reminder');
-      $reminders_list = $reminder->get_all_reminders();
+      $user_id = $_SESSION['user_id'];
+      $reminders_list = $reminder->get_all_reminders($user_id);
       $this->view('reminders/index',['reminders' => $reminders_list]);
     }
 
@@ -14,7 +15,8 @@ class Reminders extends Controller {
 
     public function edit() {
         $reminder = $this->model('Reminder');
-        $reminders_list = $reminder->get_all_reminders();
+        $user_id = $_SESSION['user_id'];
+        $reminders_list = $reminder->get_all_reminders($user_id);
         // Pass the reminders to the view
         $this->view('reminders/update', ['reminders' => $reminders_list]);
         

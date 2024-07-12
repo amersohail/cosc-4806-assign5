@@ -1,6 +1,6 @@
 <?php require_once 'app/views/templates/headerPublic.php'?>
 
-	<main role="main" class="container">
+<main role="main" class="container">
 			<div class="page-header" id="banner">
 					<div class="row">
 							<div class="col-lg-12">
@@ -9,7 +9,7 @@
 					</div>
 			</div>
 
-	<div class="row">
+<div class="row">
 			<div class="col-4">
 			<form action="/login/verify" method="post" >
 			<fieldset>
@@ -27,8 +27,8 @@
 			</form> 
 			<p class="mt-2"><a href="create/index">Cick here to register for new account</a></p>
 		</div>
-	</div>
+</div>
 
-		<?php require_once 'app/views/templates/footer.php' ?>
+<?php require_once 'app/views/templates/footer.php' ?>
 
-	</main>
+</main>

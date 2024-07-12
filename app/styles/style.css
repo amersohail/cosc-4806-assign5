@@ -23,3 +23,20 @@
 .buttonMargin{
   margin:1rem;
 }
+/* Sticky footer styles */
+/* Custom styles for sticky footer */
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    flex: 1;
+}
+footer{
+  background-color: #e9ecef; /* Slightly darker than light */
+  color: #212529;
+  padding: 1rem 0;
+}

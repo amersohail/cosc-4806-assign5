@@ -1,10 +1,11 @@
 </div>
 
-<footer class="footer">    
+<footer class="footer bg-light text-dark py-3">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <p class="text-center">Copyright &copy; <?php echo date('Y'); ?> </p>
+                <p class="text-center mb-0">Course: COSC - 4806 | Student: Amer Sohail</p>
+                <p class="text-center mb-0">Copyright &copy; <?php echo date('Y'); ?></p>
             </div>
         </div>
     </div>

@@ -1,13 +1,5 @@
-<?php
-// Check if the username session variable is set
-if (!isset($_SESSION['username'])) {
-    // Redirect to the login page
-    header("Location: /login");
-    exit();
-}
-?>
-
 <?php require_once 'app/views/templates/header.php' ?>
+
 <div class="container">
     <div class="page-header" id="banner">
         <div class="row mt-4">
@@ -33,5 +25,6 @@ if (!isset($_SESSION['username'])) {
             <p> <a href="/logout">Click here to logout</a></p>
         </div>
     </div>
+</div>
 
-    <?php require_once 'app/views/templates/footer.php' ?>
+<?php require_once 'app/views/templates/footer.php' ?>

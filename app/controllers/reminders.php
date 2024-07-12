@@ -1,6 +1,16 @@
 <?php
 
 class Reminders extends Controller {
+    public function __construct() {
+        $user = $this->model('User');
+        
+        // Ensure user is authenticated
+        if (!$user->isAuthenticated()) {
+            // If not, redirect to the home page
+            header('Location: /home');
+            exit();
+        }
+    }
 
     public function index() {		
       $reminder = $this->model('Reminder');
